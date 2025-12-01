@@ -1,4 +1,4 @@
-add_executable(Game main.c Entity.c)
+add_executable(Game main.c Config.c GameEngine.c Entity.c)
 
 target_include_directories(Game PRIVATE ${CMAKE_SOURCE_DIR}/raylib)
 

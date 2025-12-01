@@ -1,21 +1,19 @@
-#include "raylib.h"
-#include "raymath.h"
-#include "Entity.h"
+#include "GameEngine.h"
 #include <stdio.h>
 
 int main(void) {
-    InitEntityArray();
-    
-    CreateEntity(ENTITY_STATIC, (Vector2){0, 0}, (Vector2){5, 5});
-    CreateEntity(ENTITY_STATIC, (Vector2){-5, -5}, (Vector2){5, 5});
-    CreateEntity(ENTITY_DYNAMIC, (Vector2){10, 0}, (Vector2){5, 5});
+    InitialiseEngine();
 
-    EntityArray entities = GetEntities();
+    CreateEntity(ENTITY_STATIC, (Vector2){0, 0}, (Vector2){25, 25}, NULL, 0);
+    CreateEntity(ENTITY_STATIC, (Vector2){100, 50}, (Vector2){25, 25}, NULL, 0);
+    CreateEntity(ENTITY_DYNAMIC, (Vector2){50, 200}, (Vector2){25, 25}, NULL, 100);
 
-    printf("%zu\n", entities.size);
-    printf("%zu\n", entities.capacity);
+    while(IsGameRunning()) {
+        UpdateEngine();
+    }
 
-    FreeEntityArray();
+    ShutdownEngine();
+    CloseWindow();
 
     return 0;
 }

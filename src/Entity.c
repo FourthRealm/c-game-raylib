@@ -1,12 +1,33 @@
 #include "Entity.h"
 
 static EntityArray entities;
+static EntityId nextEntityId = 1;
 
-Entity* CreateEntity(EntityType type, Vector2 position, Vector2 size) {
-    Entity entityData = {type, position, (Vector2){0, 0}, size};
+Entity* CreateEntity(EntityType type, Vector2 position, Vector2 size, Texture2D* texture, int health) {
+    // Create the required entity data.
+    // Rotation, velocity, and color are defualted.
+    Entity entityData = {nextEntityId, type, position, 0, size, (Vector2){0, 0}, texture, WHITE, health};
+
+    nextEntityId++;
 
     // Add entity returns the pointer to the item in the array
     return AddEntity(entityData);
+}
+
+void DestroyAllEntities(void) {
+    FreeEntityArray();
+    InitEntityArray();
+}
+
+void UpdateAllEntities(void) {
+    // Update each entity in the entities array
+    for(size_t i = 0; i < entities.size; i++) {
+        UpdateEntity(&entities.data[i]);
+    }
+}
+
+static void UpdateEntity(Entity* entity) {
+    DrawRectangle(entity->position.x, entity->position.y, entity->size.x, entity->size.y, RED);
 }
 
 void InitEntityArray() {
@@ -30,7 +51,7 @@ void FreeEntityArray() {
     entities.capacity = 0;
 }
 
-Entity* AddEntity(Entity element) {
+static Entity* AddEntity(Entity element) {
     // Resize if capacity has been reached
     if(entities.size == entities.capacity)
         ResizeEntityArray();
