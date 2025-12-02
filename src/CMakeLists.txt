@@ -19,13 +19,14 @@ target_include_directories(Game PRIVATE ${RAYLIB_INCLUDE_DIR})
 
 # Link modules and raylib
 target_link_libraries(Game PRIVATE
-    GameEngineLib
-    ConfigLib
-    EntityLib
-
+    raylib 
     ${RAYLIB_LIBRARY}
     "-framework Cocoa"
     "-framework IOKit"
     "-framework CoreVideo"
     "-framework OpenGL"
+
+    GameEngineLib
+    ConfigLib
+    EntityLib
 )

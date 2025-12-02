@@ -4,7 +4,7 @@
 static EntityArray entities;
 static EntityId nextEntityId = 1;
 
-Entity* CreateEntity(uint8_t isDynamic, Vector2 position, Vector2 size) {
+Entity* CreateEntity(uint8_t isDynamic, Vec2 position, Vec2 size) {
     // Create the required entity data.
     // Rotation, velocity, and color are defualted.
     Entity entityData = {nextEntityId, isDynamic, position, 0, size};

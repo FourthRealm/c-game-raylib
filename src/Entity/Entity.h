@@ -1,7 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "raylib.h"
 #include <stddef.h>
 #include <stdint.h>
 
@@ -10,18 +9,24 @@
 /// @brief Strong type for entity ID's.
 typedef unsigned int EntityId;
 
+/// @brief Vector2, 2 components.
+typedef struct {
+    float x;
+    float y;
+} Vec2;
+
 /// @brief Represents a single game object or entity.
 typedef struct {
     EntityId id; ///< Unique ID for the entity.
     uint8_t isDynamic : 1; ///< Dynamic entities are updated each frame (leave as false for non moving objects).
 
-    Vector2 position; ///< Current position in world space.
+    Vec2 position; ///< Current position in world space.
     float rotation; ///< Current rotation in degrees.
-    Vector2 size; ///< Dimensions of entity (for collisions/rendering).
+    Vec2 size; ///< Dimensions of entity (for collisions/rendering).
 } Entity;
 
 /// @brief Adds a new entity to the dynamic entities array.
-Entity* CreateEntity(uint8_t isDynamic, Vector2 pos, Vector2 size);
+Entity* CreateEntity(uint8_t isDynamic, Vec2 pos, Vec2 size);
 
 /// @brief Empties the entity array.
 void DestroyAllEntities(void);
