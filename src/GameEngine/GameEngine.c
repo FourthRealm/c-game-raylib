@@ -1,4 +1,7 @@
 #include "GameEngine.h"
+#include "raylib.h"
+#include "Config.h"
+#include "Entity.h"
 
 void InitialiseEngine(void) {
     InitWindow(GetWindowWidth(), GetWindowHeight(), "Game");
@@ -20,6 +23,6 @@ void ShutdownEngine(void) {
     FreeEntityArray();
 }
 
-bool IsGameRunning(void) {
+uint8_t IsGameRunning(void) {
     return !WindowShouldClose();
 }

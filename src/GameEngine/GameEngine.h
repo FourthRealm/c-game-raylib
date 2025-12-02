@@ -1,8 +1,7 @@
 #ifndef GAME_ENGINE_H
 #define GAME_ENGINE_H
 
-#include "Config.h"
-#include "Entity.h"
+#include <stdint.h>
 
 /// @brief Initialise all systems
 void InitialiseEngine(void);
@@ -14,6 +13,6 @@ void UpdateEngine(void);
 void ShutdownEngine(void);
 
 /// @brief Determines if the game is running
-bool IsGameRunning(void);
+uint8_t IsGameRunning(void);
 
 #endif // GAME_ENGINE_H

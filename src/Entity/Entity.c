@@ -1,12 +1,13 @@
 #include "Entity.h"
+#include <stdlib.h>
 
 static EntityArray entities;
 static EntityId nextEntityId = 1;
 
-Entity* CreateEntity(EntityType type, Vector2 position, Vector2 size, Texture2D* texture, int health) {
+Entity* CreateEntity(uint8_t isDynamic, Vector2 position, Vector2 size) {
     // Create the required entity data.
     // Rotation, velocity, and color are defualted.
-    Entity entityData = {nextEntityId, type, position, 0, size, (Vector2){0, 0}, texture, WHITE, health};
+    Entity entityData = {nextEntityId, isDynamic, position, 0, size};
 
     nextEntityId++;
 
@@ -27,7 +28,7 @@ void UpdateAllEntities(void) {
 }
 
 static void UpdateEntity(Entity* entity) {
-    DrawRectangle(entity->position.x, entity->position.y, entity->size.x, entity->size.y, RED);
+
 }
 
 void InitEntityArray() {

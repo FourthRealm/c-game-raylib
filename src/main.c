@@ -1,12 +1,13 @@
 #include "GameEngine.h"
+#include "Entity.h"
 #include <stdio.h>
 
 int main(void) {
     InitialiseEngine();
 
-    CreateEntity(ENTITY_STATIC, (Vector2){0, 0}, (Vector2){25, 25}, NULL, 0);
-    CreateEntity(ENTITY_STATIC, (Vector2){100, 50}, (Vector2){25, 25}, NULL, 0);
-    CreateEntity(ENTITY_DYNAMIC, (Vector2){50, 200}, (Vector2){25, 25}, NULL, 100);
+    CreateEntity(true, (Vector2){0, 0}, (Vector2){25, 25});
+    CreateEntity(true, (Vector2){100, 50}, (Vector2){25, 25});
+    CreateEntity(true, (Vector2){50, 200}, (Vector2){25, 25});
 
     while(IsGameRunning()) {
         UpdateEngine();

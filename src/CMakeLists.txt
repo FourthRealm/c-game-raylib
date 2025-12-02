@@ -1,10 +1,29 @@
-add_executable(Game main.c Config.c GameEngine.c Entity.c)
+# Raylib
+set(RAYLIB_DIR "${CMAKE_SOURCE_DIR}/raylib")
+add_library(raylib STATIC IMPORTED)
+set_target_properties(raylib PROPERTIES
+    IMPORTED_LOCATION "${RAYLIB_DIR}/libraylib.a"
+    INTERFACE_INCLUDE_DIRECTORIES "${RAYLIB_DIR}"
+)
 
-target_include_directories(Game PRIVATE ${CMAKE_SOURCE_DIR}/raylib)
+# Add modules
+add_subdirectory(Config)
+add_subdirectory(GameEngine)
+add_subdirectory(Entity)
 
-target_link_libraries(Game PRIVATE ${CMAKE_SOURCE_DIR}/raylib/libraylib.a)
+# Main executable
+add_executable(Game main.c)
 
-target_link_libraries(Game PRIVATE ${CMAKE_SOURCE_DIR}/raylib/libraylib.a
+# Include raylib headers
+target_include_directories(Game PRIVATE ${RAYLIB_INCLUDE_DIR})
+
+# Link modules and raylib
+target_link_libraries(Game PRIVATE
+    GameEngineLib
+    ConfigLib
+    EntityLib
+
+    ${RAYLIB_LIBRARY}
     "-framework Cocoa"
     "-framework IOKit"
     "-framework CoreVideo"

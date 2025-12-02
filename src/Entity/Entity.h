@@ -2,40 +2,26 @@
 #define ENTITY_H
 
 #include "raylib.h"
-#include "raymath.h"
-#include <stdlib.h> // For malloc, free, realloc
-#include <stddef.h> // For size_t
+#include <stddef.h>
+#include <stdint.h>
 
 #define InitialEntityArraySize 100
-
-/// @brief Defines the classification of entity.
-typedef enum {
-    ENTITY_STATIC, ///< Entities that do not move or update position dynamically.
-    ENTITY_DYNAMIC ///< Entities that update position and velocity every frame.
-} EntityType;
 
 /// @brief Strong type for entity ID's.
 typedef unsigned int EntityId;
 
 /// @brief Represents a single game object or entity.
 typedef struct {
-    EntityId id; ///< Unique ID for the entity
-    EntityType type; ///< The type of the entity (static or dynamic).
+    EntityId id; ///< Unique ID for the entity.
+    uint8_t isDynamic : 1; ///< Dynamic entities are updated each frame (leave as false for non moving objects).
 
     Vector2 position; ///< Current position in world space.
     float rotation; ///< Current rotation in degrees.
     Vector2 size; ///< Dimensions of entity (for collisions/rendering).
-
-    Vector2 velocity; ///< Current velocity (only relevant to dynamic entities).
-
-    Texture2D* texture; ///< Reference to the texture of this entity.
-    Color colorTint; ///< Tint applied to this entity.
-
-    int health; ///< Health of the entity.
 } Entity;
 
 /// @brief Adds a new entity to the dynamic entities array.
-Entity* CreateEntity(EntityType type, Vector2 pos, Vector2 size, Texture2D* texture, int health);
+Entity* CreateEntity(uint8_t isDynamic, Vector2 pos, Vector2 size);
 
 /// @brief Empties the entity array.
 void DestroyAllEntities(void);
