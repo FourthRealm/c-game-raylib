@@ -6,12 +6,6 @@ set_target_properties(raylib PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${RAYLIB_DIR}"
 )
 
-# Add modules
-add_subdirectory(Config)
-add_subdirectory(GameEngine)
-add_subdirectory(Entity)
-add_subdirectory(RenderComponent)
-
 # Main executable
 add_executable(Game main.c)
 
@@ -26,9 +20,4 @@ target_link_libraries(Game PRIVATE
     "-framework IOKit"
     "-framework CoreVideo"
     "-framework OpenGL"
-
-    GameEngineLib
-    ConfigLib
-    EntityLib
-    RenderComponentLib
 )
