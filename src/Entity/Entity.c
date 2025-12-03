@@ -4,15 +4,15 @@
 static EntityArray entities;
 static EntityId nextEntityId = 1;
 
-Entity* CreateEntity(uint8_t isDynamic, Vec2 position, Vec2 size) {
+EntityId CreateEntity(Vector2 position, Vector2 size) {
     // Create the required entity data.
     // Rotation, velocity, and color are defualted.
-    Entity entityData = {nextEntityId, isDynamic, position, 0, size};
+    Entity entityData = {nextEntityId, position, 0, size};
 
     nextEntityId++;
 
     // Add entity returns the pointer to the item in the array
-    return AddEntity(entityData);
+    return AddEntity(entityData)->id;
 }
 
 void DestroyAllEntities(void) {
@@ -20,15 +20,14 @@ void DestroyAllEntities(void) {
     InitEntityArray();
 }
 
-void UpdateAllEntities(void) {
-    // Update each entity in the entities array
+Entity* GetEntityById(EntityId id) {
     for(size_t i = 0; i < entities.size; i++) {
-        UpdateEntity(&entities.data[i]);
+        if(entities.data[i].id == id)
+            return &entities.data[i];
     }
-}
 
-static void UpdateEntity(Entity* entity) {
-
+    // No entity found with id
+    return NULL;
 }
 
 void InitEntityArray() {

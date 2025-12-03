@@ -1,14 +1,22 @@
 #include "raylib.h"
 #include "GameEngine.h"
 #include "Entity.h"
-#include <stdio.h>
+#include "RenderComponent.h"
+#include <unistd.h>
+#include <libgen.h>
+#include <limits.h>
 
 int main(void) {
+    char exePath[PATH_MAX];
+    uint32_t size = sizeof(exePath);
+    if(_NSGetExecutablePath(exePath, &size) == 0) {
+        chdir(dirname(exePath));
+    }
+
     InitialiseEngine();
 
-    CreateEntity(1, (Vec2){0, 0}, (Vec2){25, 25});
-    CreateEntity(1, (Vec2){100, 50}, (Vec2){25, 25});
-    CreateEntity(1, (Vec2){50, 200}, (Vec2){25, 25});
+    EntityId id = CreateEntity((Vector2){100, 100}, (Vector2){200, 200});
+    AddRenderComponent(id, LoadTexture("assets/TestTiles.png"), WHITE);
 
     while(IsGameRunning()) {
         UpdateEngine();

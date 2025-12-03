@@ -10,6 +10,7 @@ set_target_properties(raylib PROPERTIES
 add_subdirectory(Config)
 add_subdirectory(GameEngine)
 add_subdirectory(Entity)
+add_subdirectory(RenderComponent)
 
 # Main executable
 add_executable(Game main.c)
@@ -29,4 +30,5 @@ target_link_libraries(Game PRIVATE
     GameEngineLib
     ConfigLib
     EntityLib
+    RenderComponentLib
 )
